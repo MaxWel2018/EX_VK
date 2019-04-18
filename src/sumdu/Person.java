@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Person {
+public class Person   {
 
     private String name;
     private int age;
@@ -13,19 +13,20 @@ public class Person {
     Matcher matcher;
 
 
-    public Person(String name, int age, boolean isMale) throws IllegalArgumentException {
+
+    public Person(String name, int age, boolean isMale)  {
         matcher = pattern.matcher(name);
         if (matcher.matches()) {
             this.name = name;
-        } else {
-            System.out.println("Имя Введено не корректно.Убедитесь в правильности Ввода и повторите попытку!");
-            throw new IllegalArgumentException();
+        }else{
+            throw  new IllegalArgumentException("Имя Введено не корректно.Убедитесь в правильности Ввода и повторите попытку!");
         }
-        if (age >= 0) {
+        if (age>=0) {
             this.age = age;
-        } else {
-            System.out.println("Возвраст не должен быть отрицательным");
-            throw new IllegalArgumentException();
+        }else{
+            throw  new IllegalArgumentException("Возвраст не должен быть отрицательным");
+
+
         }
         this.isMale = isMale;
     }
@@ -50,8 +51,8 @@ public class Person {
     public String toString() {
         return
                 "name='" + name + '\'' +
-                        ", age=" + age +
-                        ", isMale=" + isMale;
+                ", age=" + age +
+                ", isMale=" + isMale;
     }
 
     public String getName() {
@@ -62,7 +63,6 @@ public class Person {
     public int getAge() {
         return age;
     }
-
     public boolean isMale() {
         return isMale;
     }
