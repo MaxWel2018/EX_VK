@@ -1,18 +1,32 @@
 package sumdu;
 
-import java.util.HashSet;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class Person extends HashSet {
+public class Person {
 
-    String name;
-    int age;
-    boolean isMale;
+    private String name;
+    private int age;
+    private boolean isMale;
+    Pattern pattern = Pattern.compile("^[А-Яа-яёЁ]{3,15}$");
+    Matcher matcher;
 
 
-    public Person(String name, int age, boolean isMale) {
-        this.name = name;
-        this.age = age;
+    public Person(String name, int age, boolean isMale) throws IllegalArgumentException {
+        matcher = pattern.matcher(name);
+        if (matcher.matches()) {
+            this.name = name;
+        } else {
+            System.out.println("Имя Введено не корректно.Убедитесь в правильности Ввода и повторите попытку!");
+            throw new IllegalArgumentException();
+        }
+        if (age >= 0) {
+            this.age = age;
+        } else {
+            System.out.println("Возвраст не должен быть отрицательным");
+            throw new IllegalArgumentException();
+        }
         this.isMale = isMale;
     }
 
@@ -36,7 +50,20 @@ public class Person extends HashSet {
     public String toString() {
         return
                 "name='" + name + '\'' +
-                ", age=" + age +
-                ", isMale=" + isMale;
+                        ", age=" + age +
+                        ", isMale=" + isMale;
+    }
+
+    public String getName() {
+        return name;
+
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public boolean isMale() {
+        return isMale;
     }
 }
